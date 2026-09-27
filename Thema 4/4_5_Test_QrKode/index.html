@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Вхідне тестування — оцінювання моделей ML</title>
+<style>
+:root{--bg:#eef2f7;--card:#fff;--ink:#152238;--accent:#173f6b;--ok:#197a4b;--bad:#a63737}
+*{box-sizing:border-box} body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:var(--accent);color:white;padding:28px 18px;text-align:center}
+header h1{margin:0 0 8px;font-size:clamp(24px,4vw,40px)} header p{margin:0;opacity:.9}
+main{max-width:960px;margin:28px auto;padding:0 16px}
+.namebox,.card,.result{background:var(--card);border-radius:18px;padding:22px;margin:0 0 22px;box-shadow:0 8px 28px rgba(0,0,0,.08)}
+.namebox input{width:100%;padding:13px;border:1px solid #bcc7d6;border-radius:10px;font-size:16px}
+.qnum{font-weight:700;color:var(--accent)} h2{font-size:21px;line-height:1.35}
+.card img{width:100%;max-height:430px;object-fit:contain;border-radius:12px;margin:8px 0 18px;background:#fafafa}
+.options{display:grid;gap:10px} .option{display:flex;gap:10px;align-items:flex-start;border:1px solid #ccd5e0;border-radius:12px;padding:13px;cursor:pointer}
+.option:hover{background:#f5f8fb} .option input{margin-top:3px}
+button{display:block;width:100%;padding:15px;border:0;border-radius:12px;background:var(--accent);color:white;font-size:18px;font-weight:700;cursor:pointer}
+.result{display:none;text-align:center} .result strong{font-size:32px}
+footer{text-align:center;padding:22px;color:#657286}
+
+.question img, .q img, article img {
+  width: 100%;
+  max-height: 360px;
+  object-fit: cover;
+  border-radius: 18px;
+  display: block;
+  margin: 16px 0 18px;
+}
+</style></head>
+<body>
+<header><h1>Вхідне тестування</h1><p>Оцінювання та налаштування моделей машинного навчання · 6 питань</p></header>
+<main>
+<div class="namebox"><label><b>Прізвище, ім’я слухача</b></label><input id="student" placeholder="Введіть прізвище та ім’я"></div>
+<form id="quiz"><section class="card">
+      <div class="qnum">Питання 1 / 6</div>
+      <h2>Модель має Training Accuracy = 98%, а Validation Accuracy = 72%. Що найімовірніше відбувається?</h2>
+      
+      <div class="options"><label class="option"><input type="radio" name="q1" value="0"><span>Модель недонавчена (underfitting)</span></label><label class="option"><input type="radio" name="q1" value="1"><span>Модель перенавчилася (overfitting)</span></label><label class="option"><input type="radio" name="q1" value="2"><span>Модель однаково добре працює на нових і навчальних даних</span></label></div>
+    </section><section class="card">
+      <div class="qnum">Питання 2 / 6</div>
+      <h2>Система розпізнає «БПЛА / не БПЛА». Особливо небезпечно пропустити реальний БПЛА. Яка метрика тут найважливіша?</h2>
+      
+      <div class="options"><label class="option"><input type="radio" name="q2" value="0"><span>Accuracy</span></label><label class="option"><input type="radio" name="q2" value="1"><span>Recall</span></label><label class="option"><input type="radio" name="q2" value="2"><span>Precision</span></label></div>
+    </section><section class="card">
+      <div class="qnum">Питання 3 / 6</div>
+      <h2>Чому результат одного Train/Test split може бути недостатнім для надійного оцінювання моделі?</h2>
+      
+      <div class="options"><label class="option"><input type="radio" name="q3" value="0"><span>Модель обов’язково повинна навчатися п’ять разів</span></label><label class="option"><input type="radio" name="q3" value="1"><span>Результат може залежати від випадкового складу Train і Test</span></label><label class="option"><input type="radio" name="q3" value="2"><span>Test-набір не можна використовувати для оцінювання</span></label></div>
+    </section><section class="card">
+      <div class="qnum">Питання 4 / 6</div>
+      <h2>Після 5-fold cross-validation отримано Accuracy: 0.91 | 0.89 | 0.92 | 0.90 | 0.91. Який висновок найбільш обґрунтований?</h2>
+      
+      <div class="options"><label class="option"><input type="radio" name="q4" value="0"><span>Модель має ознаки сильного перенавчання</span></label><label class="option"><input type="radio" name="q4" value="1"><span>Модель демонструє досить стабільний результат</span></label><label class="option"><input type="radio" name="q4" value="2"><span>Потрібно використати тільки найкращий результат 0.92</span></label></div>
+    </section><section class="card">
+      <div class="qnum">Питання 5 / 6</div>
+      <h2>Потрібно перевірити всі задані комбінації n_estimators, max_depth і min_samples_split. Який інструмент найбільш доречний?</h2>
+      
+      <div class="options"><label class="option"><input type="radio" name="q5" value="0"><span>train_test_split</span></label><label class="option"><input type="radio" name="q5" value="1"><span>GridSearchCV</span></label><label class="option"><input type="radio" name="q5" value="2"><span>confusion_matrix</span></label></div>
+    </section><section class="card">
+      <div class="qnum">Питання 6 / 6</div>
+      <h2>Модель має Accuracy = 96%, але Recall для критично важливого класу лише 58%. Який висновок найбільш коректний?</h2>
+      
+      <div class="options"><label class="option"><input type="radio" name="q6" value="0"><span>Високої Accuracy достатньо</span></label><label class="option"><input type="radio" name="q6" value="1"><span>Модель може пропускати значну частину критично важливого класу</span></label><label class="option"><input type="radio" name="q6" value="2"><span>Низький Recall означає низьку Accuracy</span></label></div>
+    </section><button type="submit">Завершити тест</button></form>
+<div class="result" id="result"></div>
+</main>
+<footer>Навчальний тест · Theme 4</footer>
+<script>
+const correct=[1,1,1,1,1,1];
+const RESULTS_URL='https://script.google.com/macros/s/AKfycbyBw2_iKHTyVjBL9r9xObv8tyFyfVDCIm2TF75PLtlCFrocNcD_6Fm7Sn2hJNTQFvJ0/exec';
+
+document.getElementById('quiz').addEventListener('submit', async e=>{
+ e.preventDefault();
+
+ const name=document.getElementById('student').value.trim();
+ if(!name){alert('Введіть прізвище та ім’я.');return;}
+
+ let score=0, missing=[], answers=[], correctness=[];
+ correct.forEach((ans,i)=>{
+   const x=document.querySelector(`input[name="q${i+1}"]:checked`);
+   if(!x) missing.push(i+1);
+   else {
+     const selected=Number(x.value);
+     answers.push(selected);
+     const ok=selected===ans ? 1 : 0;
+     correctness.push(ok);
+     if(ok) score++;
+   }
+ });
+
+ if(missing.length){alert('Дайте відповідь на питання: '+missing.join(', '));return;}
+
+ const pct=Math.round(score/correct.length*100);
+ const payload={
+   name,
+   q1:correctness[0], q2:correctness[1], q3:correctness[2],
+   q4:correctness[3], q5:correctness[4], q6:correctness[5],
+   score,
+   percent:pct
+ };
+
+ const button=e.submitter;
+ if(button){button.disabled=true; button.textContent='Надсилання…';}
+
+ try {
+   await fetch(RESULTS_URL,{
+     method:'POST',
+     mode:'no-cors',
+     headers:{'Content-Type':'text/plain;charset=utf-8'},
+     body:JSON.stringify(payload)
+   });
+ } catch(err) {
+   console.error('Не вдалося надіслати результат:',err);
+ }
+
+ const r=document.getElementById('result');
+ r.style.display='block';
+ r.innerHTML=`<h2>${name}, результат</h2><strong>${score} / ${correct.length}</strong><p>${pct}%</p><p>Результат надіслано викладачу. Після тесту обговоріть питання, які викликали найбільше труднощів.</p>`;
+ r.scrollIntoView({behavior:'smooth'});
+ if(button){button.textContent='Результат надіслано';}
+});
+</script></body></html>
